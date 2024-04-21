@@ -25,9 +25,53 @@ In this example, we are going to prove these two points above.
 The app contains two blocks:
 - The left block is registered with mouse enter event
 - The right block is registered with mouse over event
+
 Each block has three layers:
 - The outest layer with title `Mouse enter block` or `Mouse over block`
 - The `level 1` layer registers with mouse event
 - The `level 2` layer registers with mouse event
 
 ![The mouse example structure](/src/assets/mouse-example.png)
+
+#### Mouse enter does not bubble
+Try moving the mouse with these step from `level 2` to `level 1` for each block, you could see:
+The mouse enter block's console:
+```
+level 1
+level 2
+```
+**Explanation**:
+1. The mouse enters the block `level 1`, it triggers mouse enter event and logs `level 1` on the console
+2. The mouse enters the block `level 2`, it triggers mouse enter event and logs `level 2` on the console
+
+The mouse over block's console:
+```
+level 1
+level 2
+level 1
+```
+**Explanation**:
+1. The mouse enters the block `level 1`, it triggers `mouseover` event and logs `level 1` on the console
+2. The mouse enters the block `level 2`, it triggers `mouseover` event and logs `level 2` on the console
+3. The `mouseover` event does the bubble up, it triggers mouse over event on `level 1` block and logs the `level 1` on the console
+
+#### Mouse enter is not sent when moving from descendants to own space
+Start from `level 1`, move the mouse to `level 2` for each block, you could see:
+The mouse enter block's console:
+```
+<empty console>
+```
+**Explanation**:
+1. The `mouseenter` event is not sent
+
+The mouse over block's console:
+```
+level 1
+```
+**Explanation**:
+1. The `mouseover` event is sent when moving from the descendant's physical space to its own physical space
+
+### Which to use `mouseenter` or `mouseover`
+From MDN:
+> With deep hierarchies, the number of mouseover events sent can be quite huge and cause significant performance problems. In such cases, it is better to listen for mouseenter events.
+
