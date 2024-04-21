@@ -6,7 +6,7 @@ This reposistory describes:
 - The differences between `mouseleave` and `mouseout`
 - Best practice
 
-## What are mouseenter and mouseover?
+# What are mouseenter and mouseover?
 From MDN:
 > [mouseenter](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseenter_event) event is fired at an Element when a pointing device is initially moved so that its hotspot is within the element at which the event was fired.
 
@@ -20,7 +20,7 @@ From this quote, there are two main points:
 - `mouseenter` does not bubble
 - `mouseenter` is not sent when the pointer is moved from one of its descendants' physical space to its own physical space
 
-## What are mouseleave and mouseout?
+# What are mouseleave and mouseout?
 From MDN:
 > [mouseleave](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_event) is fired at an Element when the cursor of a pointing device (usually a mouse) is moved out of it.
 
@@ -34,7 +34,7 @@ From [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Element/mouseleave_e
 
 There is one main point: `mouseleave` does not bubble.
 
-### Example
+# Example
 This example shows the different from MDN's points. 
 The app contains four blocks, each block registers with 4 mouse events: `mouseenter`, `mouseover`, `mouseleave`, and `mouseout`.
 
@@ -44,7 +44,7 @@ Each block has three layers:
 
 ![The mouse example structure](/src/assets/mouse-example.png)
 
-#### mouseenter does not bubble
+## mouseenter does not bubble
 Try moving the mouse from `level 1` into `level 2` block. The console looks like this:
 ```
 level 1
@@ -57,7 +57,7 @@ level 1
 level 2
 level 1
 ```
-**Explanation**:
+### Explanation
 - `mouseenter`:
   - The mouse enters the block `level 1`, it triggers `mouseenter` event and logs `level 1` on the console
   - The mouse enters the block `level 2`, it triggers `mouseenter` event and logs `level 2` on the console
@@ -66,7 +66,7 @@ level 1
   - The mouse enters the block `level 2`, it triggers `mouseover` event and logs `level 2` on the console
   - The `mouseover` event does the bubble up, it triggers `mouseover` event on `level 1` block and logs the `level 1` on the console
 
-#### mouseenter is not sent when moving from descendants to own space
+## mouseenter is not sent when moving from descendants to own space
 Start from `level 1`, and move the mouse to `level 2` for each block, you can see:
 The `mouseenter` console looks like this:
 ```
@@ -77,13 +77,13 @@ While `mouseover` console looks like this:
 ```
 level 1
 ```
-**Explanation**:
+### Explanation:
 - `mouseenter`:
   - The `mouseenter` event is not sent
 - `mouseover`:
   - The `mouseover` event is sent when moving from the descendant's physical space to its own physical space
 
-#### mouseleave does not bubble
+## mouseleave does not bubble
 1. Move the pointer from the `level 1` block into the `level 2` block
 2. Move the pointer from the `level 2` block out to the `level 1` block
 
@@ -99,7 +99,7 @@ level 2
 level 1
 level 1
 ```
-**Explanation**:
+### Explanation:
 - `mouseleave`:
   - The pointer leaves the `level 2` block then leaves the `level 1` block
 - `mouseover`:
@@ -108,7 +108,7 @@ level 1
   - The `mouseout` event bubbles up to the `level 1` block -> log `level 1`
   - The pointer leaves the `level 1` block -> log `level 1`
 
-### Best practice
+# Best practice
 From MDN:
 > With deep hierarchies, the number of mouseover events sent can be quite huge and cause significant performance problems. In such cases, it is better to listen for mouseenter events.
 
