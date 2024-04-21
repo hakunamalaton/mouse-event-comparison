@@ -26,6 +26,26 @@ function logLevel (level: string) {
       </div>
     </div>
   </div>
+  <div class="wrapper">
+    <div>
+      Mouse leave block
+      <div @mouseleave="() => logLevel('level 1')" class="enter">
+        Level 1
+        <div @mouseleave="() => logLevel('level 2')" class="enter">
+          Level 2
+        </div>
+      </div>
+    </div>
+    <div>
+      Mouse out block
+      <div @mouseout="() => logLevel('level 1')" class="over">
+        Level 1
+        <div @mouseout="() => logLevel('level 2')" class="over">
+          Level 2
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <style scoped>
